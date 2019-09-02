@@ -49,7 +49,7 @@ class Onboarding extends React.Component {
                   onPress={() => navigation.navigate("Home")}
                   textStyle={{ color: argonTheme.COLORS.BLACK }}
                 >
-                  Get Started
+                  LOGIN
                 </Button>
               </Block>
           </Block>

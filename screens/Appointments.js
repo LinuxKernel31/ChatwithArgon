@@ -33,7 +33,10 @@ export default class Appointments extends React.Component{
             //         <Text >{ this.props.navigation.state.params.name }</Text>
             //     </Block>
             // </Block>
-            <Text >{ this.props.navigation.state.params.name }</Text>
+            <View style={styles.container} >
+            <Text>{ this.props.navigation.state.params.name }</Text>
+            </View>
+            
 
             
             // </ScrollView>

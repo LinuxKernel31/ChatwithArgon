@@ -211,14 +211,6 @@ const AppStack = createDrawerNavigator(
         )
       })
     },
-    Articles: {
-      screen: ArticlesStack,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Articles" title="Articles" />
-        )
-      })
-    },
     Appointments: {
       screen: Appointments,
       navigationOptions: navOpt => ({

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import {StyleSheet, Dimensions, View, Text, FlatList, ScrollView, Card, TouchableOpacity} from 'react-native';
-import { Block, theme } from 'galio-framework';
+import {StyleSheet, Dimensions, View, Text, FlatList, ScrollView, TouchableOpacity} from 'react-native';
 import firebase from "../firebase"
 import articles from '../constants/articles';
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
+import { Card } from 'react-native-paper';
+import argonTheme from "../constants/Theme";
+import { Block, theme } from "galio-framework";
 
 
 const { width } = Dimensions.get('screen');
@@ -38,15 +40,35 @@ export default class Doctors extends React.Component{
             showsVerticalScrollIndicator={false} >
             { this.state.doctorsNames.map((value) => (
                   
-                    <Block key={value.Name} style={{ paddingHorizontal: theme.SIZES.BASE }}>
-                        <Block center>
-                            <TouchableOpacity style={styles.buttonContainer} onPress={() => {
-                                navigation.navigate('Appointments', { name : value.Name });
-                            }}>
-                                <Text style={styles.buttonText}>{value.Name} -- {value.Time}</Text>
-                            </TouchableOpacity>
-                        </Block>
-                    </Block>
+                    // <Block key={value.Name} style={{ paddingHorizontal: theme.SIZES.BASE }}>
+                    //     <Block center>
+                    //         <TouchableOpacity style={styles.buttonContainer} onPress={() => {
+                    //             navigation.navigate('Appointments', { name : value.Name,
+                    //                                                   time : value.Time});
+                    //         }}>
+                    //             <Text style={styles.buttonText}>{value.Name} -- {value.Time}</Text>
+                    //         </TouchableOpacity>
+                    //     </Block>
+                    // </Block>
+                    <View style={styles.container}>
+                        <Card >
+                    
+                            <Text style={styles.paragraph}>
+                                {value.Name}
+                            </Text>
+                            <Text style={styles.paragraph}>
+                                {value.Time}
+                            </Text>
+                            <Button
+                                style={styles.button}
+                                color={argonTheme.COLORS.SECONDARY}
+                                onPress={() => navigation.navigate('Appointments', {name: value.Name, time: value.Time})}
+                                textStyle={{ color: argonTheme.COLORS.BLACK }}
+                                >
+                                <Text>Set Appointment with Dr. {value.Name}</Text>
+                            </Button>
+                        </Card>
+                     </View>
                     
                 
                 )) }
@@ -65,6 +87,27 @@ export default class Doctors extends React.Component{
 
 
 }
+const styles1 = StyleSheet.create({
+    container: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingTop: 40,
+      backgroundColor: '#ecf0f1',
+    },
+    paragraph: {
+      margin: 24,
+      fontSize: 18,
+      fontWeight: 'bold',
+      textAlign: 'center',
+      color: '#34495e',
+    },
+    cardContainer:
+    {
+        width: 200,
+        height: 150
+    }
+  });
 const styles = StyleSheet.create({
     home: {
       width: width,    
