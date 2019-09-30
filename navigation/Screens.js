@@ -19,6 +19,7 @@ import Articles from "../screens/Articles";
 import Appointments from "../screens/Appointments";
 import Chat from "../screens/Chat";
 import Doctors from "../screens/Doctors"
+import DoctorOnboarding from "../screens/DoctorOnboarding"
 
 // drawer
 
@@ -202,6 +203,16 @@ const AppStack = createDrawerNavigator(
         )
       })
     },
+    DoctorOnboarding:
+    {
+      screen: DoctorOnboarding,
+      navigationOptions: navOpt => ({
+        drawerLabel: ({ focused }) => (
+          <DrawerItem focused={focused} screen="DoctorOnboarding" title="Doctor Login" />
+        )
+      })
+    },
+    
     Doctors:
     {
       screen: Doctors,

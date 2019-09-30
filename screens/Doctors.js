@@ -78,10 +78,10 @@ export default class Doctors extends React.Component{
             </ScrollView>
         );
     }
-
+                                                                                                                
     tite = () => {
         const {navigation} = this.props;
-        // console.warn(name);
+        // console.warn(name);      
         navigation.navigate('Appointment')
     }
 

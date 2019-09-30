@@ -5,9 +5,7 @@ import {
   StyleSheet,
   StatusBar,
   Dimensions,
-  KeyboardAvoidingView,
-  Linking,
-  TouchableHighlight
+  KeyboardAvoidingView
 } from "react-native";
 import { Block, Button, Text, theme } from "galio-framework";
 import { Select, Icon, Input, Header, Switch } from "../components/";
@@ -19,9 +17,8 @@ import Images from "../constants/Images";
 
 
 
-class Onboarding extends React.Component {
+class DoctorOnboarding extends React.Component {
 
-  
   constructor(props)
   {
     super(props);
@@ -39,7 +36,7 @@ class Onboarding extends React.Component {
   async componentDidMount(){
     const users = [];
     const pass = [];
-    await firebase.firestore().collection('User').get()
+    await firebase.firestore().collection('Doctors').get()
         .then(querySnapshot => {
             querySnapshot.docs.forEach(doc => {
                 pass.push(doc.data().password);
@@ -52,7 +49,6 @@ class Onboarding extends React.Component {
   render() {
 
     return (
-      
       <Block flex style={styles.container}>
         <Block flex center>
         <ImageBackground
@@ -61,7 +57,7 @@ class Onboarding extends React.Component {
           />
         </Block>
         <Block center>
-          <Image source={Images.LogoOnboarding} style={styles.logo} />
+          <Image source={Images.doctorLogo} style={styles.logo} />
         </Block>
         <Block flex space="between" style={styles.padded}>
             <Block flex space="around" style={{ zIndex: 2 }}>
@@ -78,12 +74,8 @@ class Onboarding extends React.Component {
                   </Block>
                   
                 </Block>
-                <Block center>
-                <TouchableHighlight onPress={this.go_to_doctors}><Text style={styles.padtop}>Are you a Doctor? Login Here...</Text></TouchableHighlight>
-                </Block>
               </Block>
               <Block center>
-                
                 <Button
                   style={styles.button}
                   color={argonTheme.COLORS.SECONDARY}
@@ -101,8 +93,6 @@ class Onboarding extends React.Component {
 
   auth_login = () =>
   {
-
-
     const { navigation } = this.props;
     if(this.state.password == '' || this.state.username == '')
     {
@@ -117,14 +107,6 @@ class Onboarding extends React.Component {
       alert("Wrong username or password");
     }
     
-    
-  }
-  go_to_doctors = () =>
-  {
-    const { navigation } = this.props;
-    
-    navigation.navigate('DoctorOnboarding');
-
   }
 }
 
@@ -145,8 +127,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0
   },
   logo: {
-    width: 200,
-    height: 60,
+    width: 120,
+    height: 120,
     zIndex: 2,
     position: 'relative',
     marginTop: '-50%'
@@ -156,14 +138,7 @@ const styles = StyleSheet.create({
   },
   subTitle: {
     marginTop: 20
-  },
-  padtop: 
-  {
-    color: '#ffffff',
-    fontSize: 14,
- 
-
   }
 });
 
-export default Onboarding;
+export default DoctorOnboarding;
