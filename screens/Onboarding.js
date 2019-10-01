@@ -80,6 +80,7 @@ class Onboarding extends React.Component {
                 </Block>
                 <Block center>
                 <TouchableHighlight onPress={this.go_to_doctors}><Text style={styles.padtop}>Are you a Doctor? Login Here...</Text></TouchableHighlight>
+                <TouchableHighlight onPress={this.go_to_register}><Text style={styles.padtop}>Register Here...</Text></TouchableHighlight>
                 </Block>
               </Block>
               <Block center>
@@ -102,19 +103,20 @@ class Onboarding extends React.Component {
   auth_login = () =>
   {
 
-
+    var found_username = this.state.userNames.includes(this.state.username);
+    var found_password = this.state.passWords.includes(this.state.password);
+    
     const { navigation } = this.props;
     if(this.state.password == '' || this.state.username == '')
     {
-        alert("Wrong username or password");
+        alert("Incorrect username or password");
     }
-    else if(this.state.passWords.indexOf(this.state.password) == this.state.userNames.indexOf(this.state.username) )
+    if(found_username == true && found_password == true)
     {
-        navigation.navigate('Home')
+        navigation.navigate('Home');
     }
-   
     else{
-      alert("Wrong username or password");
+      alert("Incorrect username or password");
     }
     
     
@@ -125,6 +127,12 @@ class Onboarding extends React.Component {
     
     navigation.navigate('DoctorOnboarding');
 
+  }
+  go_to_register = () =>
+  {
+    const {navigation} = this.props;
+
+    navigation.navigate('Registration')
   }
 }
 

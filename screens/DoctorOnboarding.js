@@ -96,7 +96,7 @@ class DoctorOnboarding extends React.Component {
     const { navigation } = this.props;
     if(this.state.password == '' || this.state.username == '')
     {
-        alert("Wrong username or password");
+        alert("Incorrect username or password");
     }
     else if(this.state.passWords.indexOf(this.state.password) == this.state.userNames.indexOf(this.state.username) )
     {
@@ -104,7 +104,7 @@ class DoctorOnboarding extends React.Component {
     }
    
     else{
-      alert("Wrong username or password");
+      alert("Incorrect username or password");
     }
     
   }

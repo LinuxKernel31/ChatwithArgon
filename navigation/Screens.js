@@ -20,6 +20,7 @@ import Appointments from "../screens/Appointments";
 import Chat from "../screens/Chat";
 import Doctors from "../screens/Doctors"
 import DoctorOnboarding from "../screens/DoctorOnboarding"
+import Registration from "../screens/Registration"
 
 // drawer
 
@@ -219,6 +220,15 @@ const AppStack = createDrawerNavigator(
       navigationOptions: navOpt => ({
         drawerLabel: ({ focused }) => (
           <DrawerItem focused={focused} screen="Doctors" title="Doctors" />
+        )
+      })
+    },
+    Registration:
+    {
+      screen: Registration,
+      navigationOptions: navOpt => ({
+        drawerLabel: ({ focused }) => (
+          <DrawerItem focused={focused} screen="Registration" title="Registration" />
         )
       })
     },
