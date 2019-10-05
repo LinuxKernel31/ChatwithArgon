@@ -3,9 +3,9 @@ import {StyleSheet, Dimensions, View, Text, FlatList, ScrollView, TouchableOpaci
 import firebase from "../firebase"
 import articles from '../constants/articles';
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
-import { Card } from 'react-native-paper';
+
 import argonTheme from "../constants/Theme";
-import { Block, theme } from "galio-framework";
+import { Block, Card, theme } from "galio-framework";
 
 
 const { width } = Dimensions.get('screen');
@@ -39,36 +39,31 @@ export default class Doctors extends React.Component{
             <ScrollView
             showsVerticalScrollIndicator={false} >
             { this.state.doctorsNames.map((value) => (
-                  
-                    // <Block key={value.Name} style={{ paddingHorizontal: theme.SIZES.BASE }}>
-                    //     <Block center>
-                    //         <TouchableOpacity style={styles.buttonContainer} onPress={() => {
-                    //             navigation.navigate('Appointments', { name : value.Name,
-                    //                                                   time : value.Time});
-                    //         }}>
-                    //             <Text style={styles.buttonText}>{value.Name} -- {value.Time}</Text>
-                    //         </TouchableOpacity>
-                    //     </Block>
-                    // </Block>
-                    <View style={styles.container}>
-                        <Card >
-                    
-                            <Text style={styles.paragraph}>
-                                {value.Name}
-                            </Text>
-                            <Text style={styles.paragraph}>
-                                {value.Time}
-                            </Text>
-                            <Button
-                                style={styles.button}
-                                color={argonTheme.COLORS.SECONDARY}
-                                onPress={() => navigation.navigate('Appointments', {name: value.Name, time: value.Time})}
-                                textStyle={{ color: argonTheme.COLORS.BLACK }}
-                                >
-                                <Text>Set Appointment with Dr. {value.Name}</Text>
-                            </Button>
-                        </Card>
-                     </View>
+                <Block>
+                        <Card
+                        flex
+                        borderless
+                        style={styles.card}
+                        title={value.Name}
+                        caption={value.Time}
+                        location="Quezon City"
+                        avatar="http://i.pravatar.cc/100?id=skater"
+                        imageStyle={styles.cardImageRadius}
+                        imageBlockStyle={{ padding: theme.SIZES.BASE / 2 }}
+                        image="https://images.unsplash.com/photo-1497802176320-541c8e8de98d?&w=1600&h=900&fit=crop&crop=entropy&q=300"
+                        
+                        />
+                        <Block center>
+                        <Button
+                        color="success"
+                        title="Set Appointment"
+                        onPress={() => navigation.navigate('Appointments', {name: value.Name, time: value.Time})} center>
+                        <Text>Set an appointment with Dr. {value.Name}</Text>
+                        </Button>
+                        </Block>
+                            
+                </Block>
+  
                     
                 
                 )) }
@@ -94,6 +89,10 @@ const styles1 = StyleSheet.create({
       justifyContent: 'center',
       paddingTop: 40,
       backgroundColor: '#ecf0f1',
+    },
+    cardImageRadius:
+    {
+        borderRadius: 15
     },
     paragraph: {
       margin: 24,

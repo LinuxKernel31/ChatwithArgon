@@ -207,11 +207,9 @@ const AppStack = createDrawerNavigator(
     DoctorOnboarding:
     {
       screen: DoctorOnboarding,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="DoctorOnboarding" title="Doctor Login" />
-        )
-      })
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
     },
     
     Doctors:
@@ -226,19 +224,15 @@ const AppStack = createDrawerNavigator(
     Registration:
     {
       screen: Registration,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Registration" title="Registration" />
-        )
-      })
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
     },
     Appointments: {
       screen: Appointments,
-      navigationOptions: navOpt => ({
-        drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} screen="Appointments" title="Appointments" />
-        )
-      })
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
     }
   },
   Menu

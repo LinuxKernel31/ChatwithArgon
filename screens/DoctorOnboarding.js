@@ -28,8 +28,6 @@ class DoctorOnboarding extends React.Component {
       password: '',
       userNames: [],
       passWords: [],
-      dbaseusername: '',
-      dbasepassword: '',
     };
   }
 
@@ -41,6 +39,7 @@ class DoctorOnboarding extends React.Component {
             querySnapshot.docs.forEach(doc => {
                 pass.push(doc.data().password);
                 users.push(doc.id);
+       
             });
             this.setState({passWords: pass,
                            userNames : users });

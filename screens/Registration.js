@@ -9,15 +9,14 @@ import * as ImagePicker from 'expo-image-picker'
 import Constants from 'expo-constants';
 import * as Permissions from 'expo-permissions';
 import firebase from "../firebase";
+import "firebase/storage";
+
 
 const { height, width } = Dimensions.get("screen");
 
  
 class Registration extends React.Component {
     
-    states = {
-        image: null,
-      };
     
     constructor(props)
     {
@@ -27,7 +26,9 @@ class Registration extends React.Component {
                       age : '',
                       contact_number : '',
                       emails: '',
-                      passwords: '' };
+                      passwords: '',
+                      image: null,
+                      imageurl: '' };
     }
     async componentDidMount() {
         this.getPermissionAsync();
@@ -42,24 +43,92 @@ class Registration extends React.Component {
           }
         }
       }
+
+      uriToBlob = (uri) => {
+
+        return new Promise((resolve, reject) => {
+    
+          const xhr = new XMLHttpRequest();
+    
+          xhr.onload = function() {
+            // return the blob
+            resolve(xhr.response);
+          };
+          
+          xhr.onerror = function() {
+            // something went wrong
+            reject(new Error('uriToBlob failed'));
+          };
+    
+          // this helps us get a blob
+          xhr.responseType = 'blob';
+    
+          xhr.open('GET', uri, true);
+          xhr.send(null);
+    
+        });
+    
+      }
+      uploadImage = async (blob) => {
+        
+        return new Promise((resolve, reject)=>{
+
+          var storageRef = firebase.storage().ref();
+    
+          storageRef.child("Profile/" + this.state.imageurl).put(blob, {
+            contentType: 'image/jpeg'
+          }).then((snapshot)=>{
+    
+            blob.close();
+            
+            resolve(snapshot);
+    
+          }).catch((error)=>{
+    
+            reject(error);
+    
+          });
+    
+        });
+      };
+
+      
     
       _pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
-          allowsEditing: true,
-          aspect: [4, 3],
-        });
+        ImagePicker.launchImageLibraryAsync({ 
+          mediaTypes: "Images"
+        }).then((result)=>{ 
+    
+          if (!result.cancelled) {
+            // User picked an image
 
+            var uniqueID = Math.floor(Math.random() * 100 ) + 1;
+            this.setState({ imageurl: result.uri.split('/').pop() + uniqueID ,
+            image: result.uri  });
+            const {height, width, type, uri} = result;
+            return this.uriToBlob(uri);
     
-        console.log(result);
+          }
     
-        if (!result.cancelled) {
-          this.setState({ image: result.uri });
-        }
+        }).then((blob)=>{
+    
+          return this.uploadImage(blob);
+    
+        }).then((snapshot)=>{
+    
+          console.log("File uploaded");
+       
+        }).catch((error)=>{
+    
+          throw error;
+    
+        }); 
       };
 
       _toFireStore = () =>
       {
+        this.uploadImage()
+
         const setToFireStore = firebase.firestore().collection('User').doc(this.state.emails);
         if(this.state.image != null)
         {
@@ -70,7 +139,7 @@ class Registration extends React.Component {
             contact_number: this.state.contact_number,
             emails: this.state.emails,
             password: this.state.passwords,
-            image: this.states.image
+            image: this.state.imageurl
           }).then((docRef) => {
             alert("Registration Successful")
             this.props.navigation.navigate('Onboarding');
@@ -83,6 +152,7 @@ class Registration extends React.Component {
         else{
             alert("Image is null, please upload some image.")
         }
+
             
             
       }
