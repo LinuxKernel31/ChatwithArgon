@@ -7,9 +7,8 @@ import {
   ImageBackground,
   Platform
 } from "react-native";
-import { Block, Text, theme } from "galio-framework";
+import { Block, Button, Text, theme } from "galio-framework";
 
-import { Button } from "../components";
 import { Images, argonTheme } from "../constants";
 import { HeaderHeight } from "../constants/utils";
 const { width, height } = Dimensions.get("screen");
@@ -124,38 +123,6 @@ class Profile extends React.Component {
                     >
                       Show more
                     </Button>
-                  </Block>
-                  <Block
-                    row
-                    style={{ paddingVertical: 14, alignItems: "baseline" }}
-                  >
-                    <Text bold size={16} color="#525F7F">
-                      Album
-                    </Text>
-                  </Block>
-                  <Block
-                    row
-                    style={{ paddingBottom: 20, justifyContent: "flex-end" }}
-                  >
-                    <Button
-                      small
-                      color="transparent"
-                      textStyle={{ color: "#5E72E4", fontSize: 12 }}
-                    >
-                      View all
-                    </Button>
-                  </Block>
-                  <Block style={{ paddingBottom: -HeaderHeight * 2 }}>
-                    <Block row space="between" style={{ flexWrap: "wrap" }}>
-                      {Images.Viewed.map((img, imgIndex) => (
-                        <Image
-                          source={{ uri: img }}
-                          key={`viewed-${img}`}
-                          resizeMode="cover"
-                          style={styles.thumb}
-                        />
-                      ))}
-                    </Block>
                   </Block>
                 </Block>
               </Block>

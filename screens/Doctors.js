@@ -35,6 +35,7 @@ export default class Doctors extends React.Component{
 
     render() {
         const {navigation} = this.props;
+        console.log(this.props);
         return (
             <ScrollView
             showsVerticalScrollIndicator={false} >
@@ -50,7 +51,7 @@ export default class Doctors extends React.Component{
                         avatar="http://i.pravatar.cc/100?id=skater"
                         imageStyle={styles.cardImageRadius}
                         imageBlockStyle={{ padding: theme.SIZES.BASE / 2 }}
-                        image="https://images.unsplash.com/photo-1497802176320-541c8e8de98d?&w=1600&h=900&fit=crop&crop=entropy&q=300"
+                        image="https://firebasestorage.googleapis.com/v0/b/chatbot-escuyos.appspot.com/o/Profile%2Fdoctor-logo-logo1.png?alt=media&token=d0214394-f90b-4358-ab0e-3993d35a1269"
                         
                         />
                         <Block center>
@@ -74,11 +75,6 @@ export default class Doctors extends React.Component{
         );
     }
                                                                                                                 
-    tite = () => {
-        const {navigation} = this.props;
-        // console.warn(name);      
-        navigation.navigate('Appointment')
-    }
 
 
 }

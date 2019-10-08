@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {StyleSheet, Dimensions, View, Text, FlatList, ScrollView, Card, TouchableOpacity} from 'react-native';
-import { Block, theme } from 'galio-framework';
+import { Block, theme, Button } from 'galio-framework';
 import firebase from "../firebase"
 import articles from '../constants/articles';
-import { Button, Select, Icon, Input, Header, Switch } from "../components/";
+import { Select, Icon, Input, Header, Switch } from "../components/";
 
 
 const { width } = Dimensions.get('screen');
@@ -13,27 +13,8 @@ export default class Appointments extends React.Component{
     render() {
         return (
 
-            // <ScrollView
-            // showsVerticalScrollIndicator={false} >
-            // { this.state.doctorsNames.map((value) => (
-                  
-            //         <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-            //         <Block center>
-            //             <TouchableOpacity style={styles.buttonContainer} onPress={() => alert(value.Name)}>
-            //                 <Text style={styles.buttonText}>{value.Name} -- {value.Time}</Text>
-            //             </TouchableOpacity>
-            //         </Block>
-            //         </Block>
-                    
-                
-            //     )) }
-                  
-            // <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-            //     <Block center>
-            //         <Text >{ this.props.navigation.state.params.name }</Text>
-            //     </Block>
-            // </Block>
             <View style={styles.container} >
+                <Button primary>Press here</Button>
             <Text>{ this.props.navigation.state.params.name }</Text>
             </View>
             

@@ -21,6 +21,7 @@ import Chat from "../screens/Chat";
 import Doctors from "../screens/Doctors"
 import DoctorOnboarding from "../screens/DoctorOnboarding"
 import Registration from "../screens/Registration"
+import PatientOnBoarding from "../screens/PatientOnBoarding"
 
 // drawer
 
@@ -137,15 +138,6 @@ const HomeStack = createStackNavigator(
         header: <Header search options title="Home" navigation={navigation} />
       })
     },
-    Pro: {
-      screen: Pro,
-      navigationOptions: ({ navigation }) => ({
-        header: (
-          <Header left={<Block />} white transparent title="" navigation={navigation} />
-        ),
-        headerTransparent: true
-      })
-    }
   },
   {
     cardStyle: {
@@ -154,21 +146,38 @@ const HomeStack = createStackNavigator(
     transitionConfig
   }
 );
-// divideru se baga ca si cum ar fi un ecrna dar nu-i nimic duh
-const AppStack = createDrawerNavigator(
+
+const AppointmentsStack = createStackNavigator(
   {
-    Onboarding: {
-      screen: Onboarding,
+    Appointments: {
+      screen: Appointments,
       navigationOptions: {
         drawerLabel: () => {}
       }
     },
-    Home: {
-      screen: HomeStack,
+  }
+);
+
+const AppStack = createDrawerNavigator(
+  {
+  
+    PatientOnBoarding: {
+      screen: PatientOnBoarding,
       navigationOptions: navOpt => ({
         drawerLabel: ({ focused }) => (
-          <DrawerItem focused={focused} title="Home" />
+          <DrawerItem focused={focused} screen= "PatientOnBoarding" title="PatientOnBoarding" />
         )
+      })
+    },
+    Home: {
+      screen: Home,
+      navigationOptions: ({ navigation }) => ({
+        
+        header: <Header search options title="Home" navigation={navigation}/>,
+        drawerLabel: ({ focused }) => (
+                <DrawerItem focused={focused} screen= "Home" title="Home" />
+              )
+
       })
     },
     Profile: {
@@ -211,6 +220,7 @@ const AppStack = createDrawerNavigator(
         drawerLabel: () => {}
       }
     },
+   
     
     Doctors:
     {
@@ -228,11 +238,13 @@ const AppStack = createDrawerNavigator(
         drawerLabel: () => {}
       }
     },
-    Appointments: {
+    Appointments:{
       screen: Appointments,
-      navigationOptions: {
-        drawerLabel: () => {}
-      }
+      navigationOptions: ({ navigation }) => ({
+        
+        header: <Header search options title="Appointments" navigation={navigation}/>,
+
+      })
     }
   },
   Menu

@@ -106,38 +106,14 @@ class Header extends React.Component {
         break;
     }
   }
-  renderSearch = () => {
-    const { navigation } = this.props;
-    return (
-      <Input
-        right
-        color="black"
-        style={styles.search}
-        placeholder="What do you want to do?"
-        placeholderTextColor={'#8898AA'}
-        onFocus={() => navigation.navigate('Pro')}
-        iconContent={<Icon size={16} color={theme.COLORS.MUTED} name="search-zoom-in" family="ArgonExtra" />}
-      />
-    );
-  }
+
   renderOptions = () => {
     const { navigation, optionLeft, optionRight } = this.props;
 
     return (
-      <Block row style={styles.options}>
-        <Button shadowless style={[styles.tab, styles.divider]} onPress={() => navigation.navigate('Doctors')}>
-          <Block row middle>
-            <Icon name="diamond" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON} />
-            <Text size={16} style={styles.tabTitle}>{optionLeft || 'Doctors'}</Text>
+      <Block style={{ marginBottom: theme.SIZES.BASE }}>
+            <Header back title="Title" navigation={this.props.navigation} />
           </Block>
-        </Button>
-        <Button shadowless style={styles.tab} onPress={() => navigation.navigate('Pro')}>
-          <Block row middle>
-            <Icon size={16} name="bag-17" family="ArgonExtra" style={{ paddingRight: 8 }} color={argonTheme.COLORS.ICON}/>
-            <Text size={16} style={styles.tabTitle}>{optionRight || 'Specialization'}</Text>
-          </Block>
-        </Button>
-      </Block>
     );
   }
   renderTabs = () => {
@@ -152,18 +128,6 @@ class Header extends React.Component {
         initialIndex={tabIndex || defaultTab}
         onChange={id => navigation.setParams({ tabId: id })} />
     )
-  }
-  renderHeader = () => {
-    const { search, options, tabs } = this.props;
-    if (search || tabs || options) {
-      return (
-        <Block center>
-          {search ? this.renderSearch() : null}
-          {options ? this.renderOptions() : null}
-          {tabs ? this.renderTabs() : null}
-        </Block>
-      );
-    }
   }
   render() {
     const { back, title, white, transparent, bgColor, iconColor, titleColor, navigation, ...props } = this.props;
@@ -202,7 +166,6 @@ class Header extends React.Component {
           ]}
           {...props}
         />
-        {this.renderHeader()}
       </Block>
     );
   }
