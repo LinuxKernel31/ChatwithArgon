@@ -22,6 +22,9 @@ import Doctors from "../screens/Doctors"
 import DoctorOnboarding from "../screens/DoctorOnboarding"
 import Registration from "../screens/Registration"
 import PatientOnBoarding from "../screens/PatientOnBoarding"
+import DoctorRegistration from "../screens/DoctorRegistration"
+import DoctorHome from "../screens/DoctorHome"
+import DoctorAppointments from "../screens/DoctorAppointments"
 
 // drawer
 
@@ -220,6 +223,20 @@ const AppStack = createDrawerNavigator(
         drawerLabel: () => {}
       }
     },
+    DoctorAppointments:
+    {
+      screen: DoctorAppointments,
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
+    },
+    DoctorHome:
+    {
+      screen: DoctorHome,
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
+    },
    
     
     Doctors:
@@ -243,6 +260,13 @@ const AppStack = createDrawerNavigator(
       navigationOptions: ({ navigation }) => ({
         
         header: <Header search options title="Appointments" navigation={navigation}/>,
+
+      })
+    },
+    DoctorRegistration:{
+      screen: DoctorRegistration,
+      navigationOptions: ({ navigation }) => ({
+        header: <Header search options title="DoctorRegistration" navigation={navigation}/>,
 
       })
     }

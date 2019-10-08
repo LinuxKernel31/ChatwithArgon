@@ -5,7 +5,8 @@ import {
   StyleSheet,
   StatusBar,
   Dimensions,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  TouchableHighlight,
 } from "react-native";
 import { Block, Button, Text, theme } from "galio-framework";
 import { Select, Icon, Input, Header, Switch } from "../components/";
@@ -46,7 +47,7 @@ class DoctorOnboarding extends React.Component {
         });
 }                                             
   render() {
-
+    const {navigation} = this.props;
     return (
       <Block flex style={styles.container}>
         <Block flex center>
@@ -75,6 +76,9 @@ class DoctorOnboarding extends React.Component {
                 </Block>
               </Block>
               <Block center>
+                <TouchableHighlight onPress={() => navigation.navigate('DoctorRegistration')}><Text style={styles.padtop}>Register Here...</Text></TouchableHighlight>
+                </Block>
+              <Block center>
                 <Button
                   style={styles.button}
                   color={argonTheme.COLORS.SECONDARY}
@@ -90,22 +94,30 @@ class DoctorOnboarding extends React.Component {
     );
   }
 
-  auth_login = () =>
-  {
+
+  auth_login = () => {
     const { navigation } = this.props;
-    if(this.state.password == '' || this.state.username == '')
-    {
-        alert("Incorrect username or password");
-    }
-    else if(this.state.passWords.indexOf(this.state.password) == this.state.userNames.indexOf(this.state.username) )
-    {
-        navigation.navigate('Home')
-    }
-   
-    else{
-      alert("Incorrect username or password");
-    }
-    
+    firebase.firestore().collection('Doctors').doc(this.state.username).get()
+        .then(doc => {
+            if (!doc.exists) {
+                alert("Incorrect password or username")
+            } else {
+                if(this.state.username == doc.data().emails && this.state.password == doc.data().password && doc.data().status != false){
+                    console.log('navigating to Home')
+                    navigation.navigate('DoctorHome', {firstname: doc.data().first_name, image: doc.data().image, lastname: doc.data().last_name, age: doc.data().age, address: doc.data().address, email: doc.data().emails});
+                }
+                else if(doc.data().status == false){
+                  alert('Greetings Dr.' + doc.data().last_name + ', Your application is not yet approved please wait for a couple more days');
+
+                }
+                else
+                {
+                  alert("Incorred password or username")
+                }
+            }
+        }).catch(err => {
+            alert('Error getting document', err);
+        });
   }
 }
 
