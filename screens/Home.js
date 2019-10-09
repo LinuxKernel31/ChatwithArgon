@@ -94,6 +94,7 @@ class Home extends React.Component {
                       <Button
                         small
                         style={{ backgroundColor: argonTheme.COLORS.INFO }}
+                        onPress={() => navigation.navigate('Chat')}
                       >
                         CHATBOT
                       </Button>

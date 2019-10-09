@@ -102,6 +102,7 @@ class PatientOnBoarding extends React.Component {
         }).catch(err => {
             alert('Error getting document', err);
         });
+
   }
   go_to_doctors = () =>
   {

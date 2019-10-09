@@ -169,13 +169,14 @@ class DoctorRegistration extends React.Component {
           const setToFireStore = firebase.firestore().collection('Specialization').doc(this.state.specialization).collection('Doctor').doc(this.state.last_name);
 
           setToFireStore.set({
+              Name: this.state.last_name,
               first_name : this.state.first_name,
               last_name: this.state.last_name,
               contact_number: this.state.contact_number,
               emails: this.state.emails,
               specialization: this.state.specialization,
               status: this.state.status,
-              timeofAvailability: this.state.time
+              Time: this.state.time
             }).then((docRef) => {
               alert("Registration complete, please stay in touch while we review your registration");
               this.props.navigation.navigate('Onboarding');

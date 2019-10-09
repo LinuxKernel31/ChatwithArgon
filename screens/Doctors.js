@@ -74,7 +74,8 @@ export default class Doctors extends React.Component{
                          age: this.state.age,
                          image: this.state.image,
                          address: this.state.address,
-                         email: this.state.email
+                         email: this.state.email,
+                         doctoremail: value.emails
                          
                         })}
                          center>

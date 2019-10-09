@@ -37,7 +37,7 @@ export default class Appointments extends React.Component{
 
         const setToFireStoreDoctor = firebase.firestore()
         .collection('Doctors')
-        .doc(this.props.navigation.state.params.name)
+        .doc(this.props.navigation.state.params.doctoremail)
         .collection('Appointments').doc(this.state.client_lastname);
       
         setToFireStoreDoctor.set({

@@ -46,7 +46,7 @@ export default class Doctors extends React.Component{
                         flex
                         borderless
                         style={styles.card}
-                        title={value.Name}
+                        title={value.first_name}
                         caption={value.Time}
                         location="Quezon City"
                         avatar="http://i.pravatar.cc/100?id=skater"
@@ -58,8 +58,7 @@ export default class Doctors extends React.Component{
                         <Block center>
                         <Button
                         color="success"
-                        title="Set Appointment"
-                        onPress={() => navigation.navigate('Appointments', {name: value.Name, time: value.Time})} center>
+                        title="Set Appointment" center>
                         <Text>You have an appointment with {value.Name}</Text>
                         </Button>
                         </Block>

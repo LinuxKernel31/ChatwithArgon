@@ -52,7 +52,7 @@ export default class ViewAppointments extends React.Component{
                         flex
                         borderless
                         style={styles.card}
-                        title={value.first_name}
+                        title={value.doctor}
                         caption={value.Time}
                         location={value.address}
                         avatar="http://i.pravatar.cc/100?id=skater"
