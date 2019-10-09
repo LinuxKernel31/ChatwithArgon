@@ -25,6 +25,7 @@ import PatientOnBoarding from "../screens/PatientOnBoarding"
 import DoctorRegistration from "../screens/DoctorRegistration"
 import DoctorHome from "../screens/DoctorHome"
 import DoctorAppointments from "../screens/DoctorAppointments"
+import ViewAppointments from "../screens/ViewAppointments"
 
 // drawer
 
@@ -233,6 +234,13 @@ const AppStack = createDrawerNavigator(
     DoctorHome:
     {
       screen: DoctorHome,
+      navigationOptions: {
+        drawerLabel: () => {}
+      }
+    },
+    ViewAppointments:
+    {
+      screen: ViewAppointments,
       navigationOptions: {
         drawerLabel: () => {}
       }

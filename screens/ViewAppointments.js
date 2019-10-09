@@ -3,7 +3,6 @@ import {StyleSheet, Dimensions, View, Text, FlatList, ScrollView, TouchableOpaci
 import firebase from "../firebase"
 import articles from '../constants/articles';
 import { Button, Select, Icon, Input, Header, Switch } from "../components/";
-
 import argonTheme from "../constants/Theme";
 import { Block, Card, theme } from "galio-framework";
 
@@ -11,21 +10,27 @@ import { Block, Card, theme } from "galio-framework";
 const { width } = Dimensions.get('screen');
 
 
-export default class Doctors extends React.Component{
+export default class ViewAppointments extends React.Component{
 
     constructor(props) {
         super(props);
         
         this.state = {
-            doctorsNames: []
+            doctorsNames: [],
+            first_name:  this.props.navigation.state.params.client_firstname,
+            last_name: this.props.navigation.state.params.client_lastname,
+            age: this.props.navigation.state.params.client_age,
+            image: this.props.navigation.state.params.client_image,
+            address: this.props.navigation.state.params.client_address,
+            email: this.props.navigation.state.params.client_email
+
+
         };
     }
 
     async componentDidMount(){
         const doctors = [];
-
-       
-        await firebase.firestore().collection('Doctors').doc(this.props.navigation.state.params.email).collection('Appointments').get()
+        await firebase.firestore().collection('User').doc(this.state.email).collection('Appointments').get()
             .then(querySnapshot => {
                 querySnapshot.docs.forEach(doc => {
                     doctors.push(doc.data());
@@ -37,6 +42,7 @@ export default class Doctors extends React.Component{
 
     render() {
         const {navigation} = this.props;
+        console.log(this.props);
         return (
             <ScrollView
             showsVerticalScrollIndicator={false} >
@@ -46,23 +52,15 @@ export default class Doctors extends React.Component{
                         flex
                         borderless
                         style={styles.card}
-                        title={value.Name}
+                        title={value.first_name}
                         caption={value.Time}
-                        location="Quezon City"
+                        location={value.address}
                         avatar="http://i.pravatar.cc/100?id=skater"
                         imageStyle={styles.cardImageRadius}
                         imageBlockStyle={{ padding: theme.SIZES.BASE / 2 }}
                         image="https://firebasestorage.googleapis.com/v0/b/chatbot-escuyos.appspot.com/o/Profile%2Fdoctor-logo-logo1.png?alt=media&token=d0214394-f90b-4358-ab0e-3993d35a1269"
                         
                         />
-                        <Block center>
-                        <Button
-                        color="success"
-                        title="Set Appointment"
-                        onPress={() => navigation.navigate('Appointments', {name: value.Name, time: value.Time})} center>
-                        <Text>You have an appointment with {value.Name}</Text>
-                        </Button>
-                        </Block>
                             
                 </Block>
   

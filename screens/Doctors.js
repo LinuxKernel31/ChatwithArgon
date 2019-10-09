@@ -17,7 +17,15 @@ export default class Doctors extends React.Component{
         super(props);
         
         this.state = {
-            doctorsNames: []
+            doctorsNames: [],
+            first_name:  this.props.navigation.state.params.client_firstname,
+            last_name: this.props.navigation.state.params.client_lastname,
+            age: this.props.navigation.state.params.client_age,
+            image: this.props.navigation.state.params.client_image,
+            address: this.props.navigation.state.params.client_address,
+            email: this.props.navigation.state.params.client_email
+
+
         };
     }
 
@@ -58,7 +66,18 @@ export default class Doctors extends React.Component{
                         <Button
                         color="success"
                         title="Set Appointment"
-                        onPress={() => navigation.navigate('Appointments', {name: value.Name, time: value.Time})} center>
+                        onPress={() => navigation.navigate('Appointments', 
+                        {name: value.Name, 
+                         time: value.Time,
+                         firstname: this.state.first_name,
+                         lastname: this.state.last_name,
+                         age: this.state.age,
+                         image: this.state.image,
+                         address: this.state.address,
+                         email: this.state.email
+                         
+                        })}
+                         center>
                         <Text>Set an appointment with Dr. {value.Name}</Text>
                         </Button>
                         </Block>

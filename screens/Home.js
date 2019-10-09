@@ -16,7 +16,13 @@ class Home extends React.Component {
     super(props);
 
     this.state = {
-      ImageUri : null
+      ImageUri : null,
+      firstname: this.props.navigation.state.params.firstname,
+      lastname: this.props.navigation.state.params.lastname,
+      age: this.props.navigation.state.params.age,
+      image: this.props.navigation.state.params.image,
+      address: this.props.navigation.state.params.address,
+      email: this.props.navigation.state.params.email
     }
 
     storageRef = firebase.storage().ref();
@@ -60,6 +66,8 @@ class Home extends React.Component {
     }else{
       console.log('successfully retrieved image');
     }
+
+    const {navigation} = this.props;
     return (
       <ScrollView>
         <Block flex style={styles.profile}>
@@ -89,12 +97,6 @@ class Home extends React.Component {
                       >
                         CHATBOT
                       </Button>
-                      <Button
-                        small
-                        style={{ backgroundColor: argonTheme.COLORS.DEFAULT }}
-                      >
-                        MESSAGE
-                      </Button>
                     </Block>
                     <Block row space="between">
                       <Block middle>
@@ -104,20 +106,9 @@ class Home extends React.Component {
                           color="#525F7F"
                           style={{ marginBottom: 4 }}
                         >
-                          2K
-                        </Text>
-                        <Text size={12}>Appointments</Text>
-                      </Block>
-                      <Block middle>
-                        <Text
-                          bold
-                          color="#525F7F"
-                          size={12}
-                          style={{ marginBottom: 4 }}
-                        >
                           0
                         </Text>
-                        <Text size={12}>Photos</Text>
+                        <Text size={12}>Appointments</Text>
                       </Block>
                     
                     </Block>
@@ -128,7 +119,7 @@ class Home extends React.Component {
                       {this.props.navigation.state.params.firstname} {this.props.navigation.state.params.lastname}, {this.props.navigation.state.params.age}
                       </Text>
                       <Text size={16} color="#32325D" style={{ marginTop: 10 }}>
-                        San Francisco, USA
+                       {this.props.navigation.state.params.address}
                       </Text>
                     </Block>
                     <Block middle style={{ marginTop: 30, marginBottom: 16 }}>
@@ -140,19 +131,8 @@ class Home extends React.Component {
                         color="#525F7F"
                         style={{ textAlign: "center" }}
                       >
-                        An artist of considerable range, Jessica name taken by
-                        Melbourne …
+                        Welcome {this.props.navigation.state.params.lastname}! You can view doctors and set an appointment using this appplication
                       </Text>
-                      <Button
-                        color="transparent"
-                        textStyle={{
-                          color: "#233DD2",
-                          fontWeight: "500",
-                          fontSize: 16
-                        }}
-                      >
-                        Show more
-                      </Button>
 
                     </Block>
                     <Block flex style={styles.group}>
@@ -161,7 +141,14 @@ class Home extends React.Component {
                     </Text>
                     <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
                       <Block style={styles.rows}>
-                        <TouchableOpacity onPress={() => navigation.navigate("Pro")}>
+                        <TouchableOpacity onPress={() => navigation.navigate("ViewAppointments", 
+                        {client_firstname: this.state.firstname, 
+                         client_lastname: this.state.lastname,
+                         client_age: this.state.age,
+                         client_image: this.state.image,
+                         client_address: this.state.address,
+                         client_email: this.state.email
+                        })}>
                           <Block row middle space="between" style={{ paddingTop: 7 }}>
                             <Text size={14}>View your appointments here</Text>
                             <Icon
@@ -180,7 +167,15 @@ class Home extends React.Component {
                     </Text>
                     <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
                       <Block style={styles.rows}>
-                        <TouchableOpacity onPress={() => navigation.navigate("Doctors")}>
+                        <TouchableOpacity onPress={() => navigation.navigate("Doctors", 
+                        {client_firstname: this.state.firstname, 
+                         client_lastname: this.state.lastname,
+                         client_age: this.state.age,
+                         client_image: this.state.image,
+                         client_address: this.state.address,
+                         client_email: this.state.email
+                        })}
+                        >
                           <Block row middle space="between" style={{ paddingTop: 7 }}>
                             <Text size={14}>Set your appointment here.</Text>
                             <Icon
@@ -227,7 +222,7 @@ const styles = StyleSheet.create({
     // position: "relative",
     padding: theme.SIZES.BASE,
     marginHorizontal: theme.SIZES.BASE,
-    marginTop: 65,
+    marginTop: 80,
     borderTopLeftRadius: 6,
     borderTopRightRadius: 6,
     backgroundColor: theme.COLORS.WHITE,
