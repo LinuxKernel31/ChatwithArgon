@@ -27,25 +27,10 @@ class DoctorOnboarding extends React.Component {
     this.state = {
       username: '',
       password: '',
-      userNames: [],
-      passWords: [],
     };
   }
 
-  async componentDidMount(){
-    const users = [];
-    const pass = [];
-    await firebase.firestore().collection('Doctors').get()
-        .then(querySnapshot => {
-            querySnapshot.docs.forEach(doc => {
-                pass.push(doc.data().password);
-                users.push(doc.id);
-       
-            });
-            this.setState({passWords: pass,
-                           userNames : users });
-        });
-}                                             
+                                              
   render() {
     const {navigation} = this.props;
     return (
@@ -100,7 +85,10 @@ class DoctorOnboarding extends React.Component {
 
     if(this.state.username == '' && this.state.password == '')
     {
-    firebase.firestore().collection('Doctors').doc(this.state.username).get()
+      alert("Incorrect password or username")
+      }
+      else{
+        firebase.firestore().collection('Doctors').doc(this.state.username).get()
         .then(doc => {
             if (!doc.exists) {
                 alert("Incorrect password or username")
@@ -121,9 +109,6 @@ class DoctorOnboarding extends React.Component {
         }).catch(err => {
             alert('Error getting document', err);
         });
-      }
-      else{
-        alert("Incorrect password or username")
         
       }
   }

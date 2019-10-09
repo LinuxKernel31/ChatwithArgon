@@ -251,7 +251,7 @@ class DoctorRegistration extends React.Component {
                      />
                   </Block>
                   <Block style={{ paddingHorizontal: theme.SIZES.BASE }}>
-                    <Input right placeholder="Email" iconContent={<Block />} 
+                    <Input right placeholder="Username" iconContent={<Block />} 
                     onChangeText={(email) => this.setState({emails:email})}
                      />
                      </Block>

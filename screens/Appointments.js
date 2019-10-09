@@ -17,7 +17,7 @@ export default class Appointments extends React.Component{
 
     state ={
         date: new Date(),
-        time: new Time().toString(),
+        time: new Date(),
         issue: '',
         client_firstname: this.props.navigation.state.params.firstname,
         client_lastname: this.props.navigation.state.params.lastname,
@@ -114,16 +114,17 @@ export default class Appointments extends React.Component{
                 dateInput: {
                     marginLeft: 36
                 }
-                // ... You can check the source to find the other keys.
+            
                 }}
                 onDateChange={(dates) => {this.setState({date: dates})}}
             />
             </Block>
+
             <Block center>
                 <Text>Choose a time:</Text>
             <DatePicker
                 style={{width: 200}}
-                date={this.state.date}
+                date={this.state.time}
                 mode="time"
                 placeholder="select time"
                 confirmBtnText="Confirm"

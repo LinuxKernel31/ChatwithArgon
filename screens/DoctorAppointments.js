@@ -46,7 +46,7 @@ export default class Doctors extends React.Component{
                         flex
                         borderless
                         style={styles.card}
-                        title={value.first_name}
+                        title={value.Name}
                         caption={value.Time}
                         location="Quezon City"
                         avatar="http://i.pravatar.cc/100?id=skater"
