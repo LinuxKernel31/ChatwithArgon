@@ -97,6 +97,9 @@ class DoctorOnboarding extends React.Component {
 
   auth_login = () => {
     const { navigation } = this.props;
+
+    if(this.state.username == '' && this.state.password == '')
+    {
     firebase.firestore().collection('Doctors').doc(this.state.username).get()
         .then(doc => {
             if (!doc.exists) {
@@ -118,6 +121,11 @@ class DoctorOnboarding extends React.Component {
         }).catch(err => {
             alert('Error getting document', err);
         });
+      }
+      else{
+        alert("Incorrect password or username")
+        
+      }
   }
 }
 
