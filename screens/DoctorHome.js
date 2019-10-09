@@ -94,12 +94,6 @@ class DoctorHome extends React.Component {
                       >
                         CHATBOT
                       </Button>
-                      <Button
-                        small
-                        style={{ backgroundColor: argonTheme.COLORS.DEFAULT }}
-                      >
-                        MESSAGE
-                      </Button>
                     </Block>
                     <Block row space="between">
                       <Block middle>
@@ -145,8 +139,7 @@ class DoctorHome extends React.Component {
                         color="#525F7F"
                         style={{ textAlign: "center" }}
                       >
-                        An artist of considerable range, Jessica name taken by
-                        Melbourne …
+                        Welcome to the application!
                       </Text>
                       <Button
                         color="transparent"
